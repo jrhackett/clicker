@@ -13,6 +13,7 @@ type (
 		Cost          float64       `json:"cost"`
 		GainPerSecond float64       `json:"gain_per_second"`
 		Gained        float64       `json:"gained"`
+		RateOfGrowth  float64       `json:"-"`
 		LastEvaluated time.Time     `json:"last_evaluated"`
 	}
 
@@ -25,17 +26,19 @@ func New() Generators {
 		&Generator{
 			Name:          A,
 			Count:         0,
-			Cost:          1,
+			Cost:          5,
 			GainPerSecond: 5,
 			Gained:        0,
+			RateOfGrowth:  0.8,
 			LastEvaluated: now,
 		},
 		&Generator{
 			Name:          B,
-			Cost:          1,
 			Count:         0,
+			Cost:          1,
 			GainPerSecond: 2,
 			Gained:        0,
+			RateOfGrowth:  0.2,
 			LastEvaluated: now,
 		},
 	}
@@ -98,5 +101,5 @@ func (g *Generator) Evaluate() float64 {
 }
 
 func (g *Generator) TotalCost(count int) float64 {
-	return g.Cost * math.Pow(math.E, float64(count-1)*0.8)
+	return g.Cost * math.Pow(math.E, float64(count-1)*g.RateOfGrowth)
 }
