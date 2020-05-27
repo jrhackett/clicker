@@ -37,7 +37,7 @@ func Serve(p *player.Player) {
 	v1.GET("/player", s.GetPlayer)
 	v1.POST("/buy", s.Buy)
 
-	r.Run()
+	r.Run(":4333")
 }
 
 func (s *service) GetPlayer(c *gin.Context) {

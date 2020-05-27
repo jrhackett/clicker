@@ -7,6 +7,9 @@ const prod = mode === 'production'
 module.exports = {
     devServer: {
         historyApiFallback: true,
+        proxy: {
+            '/api': 'http://localhost:4333'
+        }
     },
     devtool: prod ? false : 'source-map',
 	entry: {
@@ -47,7 +50,7 @@ module.exports = {
     },
     plugins: [
 		new MiniCssExtractPlugin({ filename: '[name].css' })
-	],
+    ],
 	resolve: {
 		alias: {
 			svelte: path.resolve('node_modules', 'svelte')

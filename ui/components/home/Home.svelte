@@ -1,15 +1,19 @@
 <script>
-    export let header = 'Clicker'
+    import { onMount } from "svelte";
+
+    let player;
+
+    onMount(async () => {
+        await fetch(`/api/v1/player`)
+            .then(r => r.json())
+            .then(data => {
+                console.log(data)
+                player = data.player
+            })
+    })
 </script>
 
 <style>
-    h1 {
-        font-size: 2rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-        flex-basis: 100%;
-    }
-
     .container {
         display: flex;
         justify-content: center;
@@ -24,6 +28,17 @@
 
 <div class="container">
     <div class="offset">
-        <h1>{ header }</h1>
+        {#if player}
+            <p>{ player.liquid }</p>
+            <ul>
+                {#each player.generators as generator}
+                    <li>
+                        <h3>{ generator.name }</h3>
+                        <p>Cost: { generator.cost }</p>
+                        <p>Count: { generator.count }</p>
+                    </li>
+                {/each}
+            </ul>
+        {/if}
     </div>
 </div>
