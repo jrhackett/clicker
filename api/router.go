@@ -20,7 +20,8 @@ type (
 	}
 
 	BuyPayload struct {
-		Name string `json:"name" binding:"required"`
+		Name  string `json:"name" binding:"required"`
+		Count int    `json:"count"`
 	}
 )
 
@@ -47,8 +48,13 @@ func (s *service) GetPlayer(c *gin.Context) {
 
 func (s *service) Buy(c *gin.Context) {
 	var payload BuyPayload
+
+	// default count to 1
+	payload.Count = 1
+
 	c.BindJSON(&payload)
-	err := s.Player.Add(payload.Name)
+
+	err := s.Player.Add(payload.Name, payload.Count)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": fmt.Sprintf("%s does not exist", payload.Name),

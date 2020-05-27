@@ -30,11 +30,9 @@ func userStdInput(p *player.Player) {
 
 		switch char {
 		case 'A', 'a':
-			fmt.Println("Buying A")
-			p.Add(string(generators.A))
+			err = p.Add(string(generators.A), 1)
 		case 'B', 'b':
-			fmt.Println("Buying B")
-			p.Add(string(generators.B))
+			err = p.Add(string(generators.B), 1)
 		}
 
 		if err != nil {
