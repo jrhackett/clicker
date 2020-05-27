@@ -1,4 +1,5 @@
 <script>
+import colors from 'styles/colors'
     import { onMount } from "svelte";
 
     let player;
@@ -21,21 +22,42 @@
         height: 100%;
         flex-wrap: wrap;
     }
+
     .offset {
         margin-bottom: 20%;
+    }
+
+    ul {
+        display: flex;
+    }
+
+    li {
+        list-style: none;
+        padding: 0.5rem 1rem;
+    }
+
+    .inner {
+        padding: 0.5rem 1rem;
+        background-color: var(--tile-color);
+        border-radius: 2px; 
+        color: var(--text-color);
     }
 </style>
 
 <div class="container">
     <div class="offset">
         {#if player}
-            <p>{ player.liquid }</p>
+            <p>${ player.liquid.toFixed(2) }</p>
             <ul>
                 {#each player.generators as generator}
                     <li>
-                        <h3>{ generator.name }</h3>
-                        <p>Cost: { generator.cost }</p>
-                        <p>Count: { generator.count }</p>
+                        <div class="inner" style="--tile-color:{ colors.blue };--text-color:{ colors.white }">
+                            <h3>Name: { generator.name }</h3>
+                            <p>Cost: { generator.cost }</p>
+                            <p>Count: { generator.count }</p>
+                            <p>Gained: { generator.gained.toFixed(2) }</p>
+                            <p>Gain Per Second: { generator.gain_per_second }</p>
+                        </div>
                     </li>
                 {/each}
             </ul>
