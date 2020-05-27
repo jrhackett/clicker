@@ -2,7 +2,6 @@ package player
 
 import (
 	"clicker/internal/generators"
-	"fmt"
 	"time"
 )
 
@@ -22,7 +21,6 @@ func (p *Player) Loop() {
 	for {
 		time.Sleep(time.Millisecond * 300)
 		p.Evaluate()
-		fmt.Println("Player worth: ", p.Worth())
 	}
 }
 
@@ -36,10 +34,13 @@ func (p *Player) Worth() float64 {
 
 func (p *Player) Add(name string, count int) error {
 	cost, err := p.Generators.Cost(name, count)
-	fmt.Println("Buying ", name, cost, count)
 	if err == nil && cost <= p.Liquid {
 		p.Generators.Add(name, count)
 		p.Liquid -= cost
 	}
 	return err
+}
+
+func (p *Player) Cost(name string, count int) (float64, error) {
+	return p.Generators.Cost(name, count)
 }

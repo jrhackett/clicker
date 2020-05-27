@@ -10,7 +10,7 @@ type (
 	Generator struct {
 		Name          GeneratorName `json:"name"`
 		Count         int64         `json:"count"`
-		Cost          float64       `json:"cost"`
+		InitialCost   float64       `json:"-"`
 		GainPerSecond float64       `json:"gain_per_second"`
 		Gained        float64       `json:"gained"`
 		RateOfGrowth  float64       `json:"-"`
@@ -26,7 +26,7 @@ func New() Generators {
 		&Generator{
 			Name:          A,
 			Count:         0,
-			Cost:          5,
+			InitialCost:   5,
 			GainPerSecond: 5,
 			Gained:        0,
 			RateOfGrowth:  0.8,
@@ -35,7 +35,7 @@ func New() Generators {
 		&Generator{
 			Name:          B,
 			Count:         0,
-			Cost:          1,
+			InitialCost:   2,
 			GainPerSecond: 2,
 			Gained:        0,
 			RateOfGrowth:  0.2,
@@ -58,7 +58,9 @@ func (gs *Generators) Add(name string, count int) error {
 		return err
 	}
 
-	(*gs)[i].Count = (*gs)[i].Count + int64(count)
+	g := (*gs)[i]
+
+	g.Count = g.Count + int64(count)
 
 	return nil
 }
@@ -101,5 +103,5 @@ func (g *Generator) Evaluate() float64 {
 }
 
 func (g *Generator) TotalCost(count int) float64 {
-	return g.Cost * math.Pow(math.E, float64(count-1)*g.RateOfGrowth)
+	return g.InitialCost * math.Pow(math.E, float64(count-1)*g.RateOfGrowth)
 }

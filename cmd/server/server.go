@@ -25,7 +25,8 @@ func userStdInput(p *player.Player) {
 		char, _, err := reader.ReadRune()
 
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println("error %+v", err)
+			continue
 		}
 
 		switch char {
