@@ -12,6 +12,18 @@ import colors from 'styles/colors'
                 player = data.player
             })
     })
+
+    async function handleClick(name) {
+        await fetch(`/api/v1/buy`, {
+            method: 'POST',
+            body: JSON.stringify({ name })
+        })
+            .then(r => r.json())
+            .then(data => {
+                console.log(data)
+                player = data.player
+            })
+    }
 </script>
 
 <style>
@@ -47,15 +59,15 @@ import colors from 'styles/colors'
 <div class="container">
     <div class="offset">
         {#if player}
-            <p>${ player.liquid.toFixed(2) }</p>
+            <p>${ player.liquid.toFixed(0) }</p>
             <ul>
                 {#each player.generators as generator}
-                    <li>
+                    <li on:click={ () => handleClick(generator.name) }>
                         <div class="inner" style="--tile-color:{ colors.blue };--text-color:{ colors.white }">
                             <h3>Name: { generator.name }</h3>
                             <p>Cost: { generator.cost }</p>
                             <p>Count: { generator.count }</p>
-                            <p>Gained: { generator.gained.toFixed(2) }</p>
+                            <p>Gained: { generator.gained.toFixed(0) }</p>
                             <p>Gain Per Second: { generator.gain_per_second }</p>
                         </div>
                     </li>
