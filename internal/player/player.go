@@ -44,3 +44,7 @@ func (p *Player) Add(name string, count int) error {
 func (p *Player) Cost(name string, count int) (float64, error) {
 	return p.Generators.Cost(name, count)
 }
+
+func (p *Player) Hit() {
+	p.Liquid++
+}

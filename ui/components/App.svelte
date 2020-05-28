@@ -1,5 +1,6 @@
 <script>
     import Tile from 'components/Tile'
+    import Hit from 'components/Hit'
     import colors from 'styles/colors'
     import { playerStore } from 'stores'
     import { updatePlayer, updateGeneratorsCost } from 'stores/updates'
@@ -58,6 +59,7 @@
         <div class="inner">
             {#if !!player}
                 <p>${ player.liquid.toFixed(0) }</p>
+                <Hit />
                 <ul>
                     {#each player.generators as generator}
                         <Tile generator={ generator } />

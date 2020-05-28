@@ -37,6 +37,7 @@ func Serve(p *player.Player) {
 	v1.GET("/player", s.Player)
 	v1.GET("/cost", s.Cost)
 	v1.POST("/buy", s.Buy)
+	v1.POST("/hit", s.Hit)
 
 	r.Run(":4333")
 }
@@ -85,4 +86,11 @@ func (s *service) Buy(c *gin.Context) {
 			"player": s.player,
 		})
 	}
+}
+
+func (s *service) Hit(c *gin.Context) {
+	s.player.Hit()
+	c.JSON(http.StatusOK, gin.H{
+		"player": s.player,
+	})
 }
