@@ -23,8 +23,8 @@
     })
 
     const update = async () => await fetch('/api/v1/player')
-            .then(r => r.json())
-            .then(data => updatePlayer(data.player))
+        .then(r => r.json())
+        .then(data => updatePlayer(data.player))
 </script>
 
 <style>
