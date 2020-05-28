@@ -10,19 +10,16 @@
     let backgroundColor = colors.offWhite
 
     let player
-    const unsubscribe = playerStore.subscribe(p => {
-		player = p
-	});
+    const unsubscribe = playerStore.subscribe(p => player = p);
 
-    onMount(async () => {
-        await fetch('/api/v1/player')
-            .then(r => r.json())
-            .then(data => {
-                updatePlayer(data.player)
-                player.generators.forEach(async g => await updateGeneratorsCost(g.name))
-            })
-            .then(async () => setInterval(update, 200))
-    })
+    onMount(async () => await fetch('/api/v1/player')
+        .then(r => r.json())
+        .then(data => {
+            updatePlayer(data.player)
+            player.generators.forEach(async g => await updateGeneratorsCost(g.name))
+        })
+        .then(async () => setInterval(update, 200))
+    )
 
     const update = async () => {
         if(player.generators.reduce((acc, g) => acc += g.count, 0) > 0)

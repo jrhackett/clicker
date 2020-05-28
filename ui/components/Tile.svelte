@@ -6,21 +6,17 @@
     export let generator = {}
 
     let player
-    const unsubscribe = playerStore.subscribe(p => {
-		player = p
-	});
+    const unsubscribe = playerStore.subscribe(p => player = p);
 
-    const handleClick = async name => {
-        await fetch('/api/v1/buy', {
-            method: 'POST',
-            body: JSON.stringify({ name })
+    const handleClick = async name => await fetch('/api/v1/buy', {
+        method: 'POST',
+        body: JSON.stringify({ name })
+    })
+        .then(r => r.json())
+        .then(async data => {
+            updatePlayer(data.player)
+            await updateGeneratorsCost(name)
         })
-            .then(r => r.json())
-            .then(async data => {
-                updatePlayer(data.player)
-                await updateGeneratorsCost(name)
-            })
-    }
 </script>
 
 <style>

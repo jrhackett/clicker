@@ -2,9 +2,7 @@
     import { playerStore } from 'stores'
     
     let player
-    const unsubscribe = playerStore.subscribe(p => {
-		player = p
-	});
+    const unsubscribe = playerStore.subscribe(p => player = p);
 </script>
 
 <style>
