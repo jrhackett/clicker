@@ -1,4 +1,4 @@
-import { playerStore } from 'stores'
+import { playerStore, userStore } from 'stores'
 
 export const updatePlayer = newPlayer => {
     playerStore.update(p => ({
@@ -10,6 +10,14 @@ export const updatePlayer = newPlayer => {
         }))
     }))
 }
+
+export const updateUser = (id, name, email, image_url) => userStore.update(u => ({
+    ...u,
+    id,
+    name,
+    email,
+    image_url
+}))
 
 export const updateGeneratorsCost = async name => {
     await fetch(`api/v1/cost?name=${ name }&count=1`)
