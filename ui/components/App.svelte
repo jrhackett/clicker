@@ -7,38 +7,24 @@
     
     let backgroundColor = colors.offWhite
 
-    onMount(async () => {
-        await load()
-    })
-
     let player
     const unsubscribe = playerStore.subscribe(p => {
 		player = p
 	});
 
-    const load = async () => await fetch('/api/v1/player')
+    onMount(async () => {
+        await fetch('/api/v1/player')
             .then(r => r.json())
             .then(data => {
                 updatePlayer(data.player)
                 player.generators.forEach(async g => await updateGeneratorsCost(g.name))
             })
             .then(async () => setInterval(update, 200))
+    })
 
     const update = async () => await fetch('/api/v1/player')
             .then(r => r.json())
             .then(data => updatePlayer(data.player))
-
-    const handleClick = async name => {
-        await fetch('/api/v1/buy', {
-            method: 'POST',
-            body: JSON.stringify({ name })
-        })
-            .then(r => r.json())
-            .then(async data => {
-                updatePlayer(data.player)
-                await updateGeneratorsCost(player.generators.find(a => a.name == name).name)
-            })
-    }
 </script>
 
 <style>
