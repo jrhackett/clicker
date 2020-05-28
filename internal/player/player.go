@@ -5,13 +5,19 @@ import (
 	"time"
 )
 
-type Player struct {
-	Liquid     float64               `json:"liquid"`
-	Generators generators.Generators `json:"generators"`
-}
+type (
+	Player struct {
+		Name       string                `json:"name"`
+		Liquid     float64               `json:"liquid"`
+		Generators generators.Generators `json:"generators"`
+	}
 
-func New() *Player {
+	Players []*Player
+)
+
+func New(name string) *Player {
 	return &Player{
+		Name:       name,
 		Liquid:     2,
 		Generators: generators.New(),
 	}

@@ -1,6 +1,7 @@
 <script>
     import Tile from 'components/Tile'
     import Hit from 'components/Hit'
+    import Worth from 'components/Worth'
     import colors from 'styles/colors'
     import { playerStore } from 'stores'
     import { updatePlayer, updateGeneratorsCost } from 'stores/updates'
@@ -61,11 +62,11 @@
     <div class="container">
         <div class="inner">
             {#if !!player}
-                <p>${ player.liquid.toFixed(0) }</p>
+                <Worth />
                 <Hit />
                 <ul>
                     {#each player.generators as generator}
-                        <Tile generator={ generator } />
+                        <Tile generator={ generator } liquid={ player.liquid } />
                     {/each}
                 </ul>
             {/if}

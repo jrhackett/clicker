@@ -1,8 +1,14 @@
 <script>
     import colors from 'styles/colors'
     import { updatePlayer, updateGeneratorsCost } from 'stores/updates'
+    import { playerStore } from 'stores'
 
     export let generator = {}
+
+    let player
+    const unsubscribe = playerStore.subscribe(p => {
+		player = p
+	});
 
     const handleClick = async name => {
         await fetch('/api/v1/buy', {
@@ -32,7 +38,7 @@
 </style>
 
 <li on:click={ () => handleClick(generator.name) }>
-    <div class="tile" style="--tile-color:{ colors.blue };--text-color:{ colors.white }">
+    <div class="tile" style="--tile-color:{ player.liquid >= generator.cost ? colors.blue : colors.lightGrey };--text-color:{ colors.white }">
         <h3>Name: { generator.name }</h3>
         <p>Cost: { generator.cost && generator.cost.toFixed(0) }</p>
         <p>Count: { generator.count }</p>

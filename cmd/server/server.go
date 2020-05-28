@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	p := player.New()
+	p := player.New("Jake")
 	go p.Loop()
 
 	go userStdInput(p)
