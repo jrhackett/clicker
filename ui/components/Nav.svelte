@@ -39,7 +39,7 @@
         padding-left: 0.5rem;
     }
 
-    ul {
+    /* ul {
         display: block;
         list-style: none;
     }
@@ -55,7 +55,7 @@
 
     li:hover {
         background-color: var(--nav-background-hover-color);
-    }
+    } */
 </style>
 
 <header style="--height:{ height };--text-color:{ colors.white };">
@@ -64,13 +64,13 @@
             {@html Cat}
             <p>Kittenfluencer</p>
         </div>
-        <ul>
+        <!-- <ul>
             {#if user.id !== 0}
                 <li>{ user.name }</li>
                 <Logout />
             {:else}
                 <LogIn />
             {/if}
-        </ul>
+        </ul> -->
 	</nav>
 </header>
