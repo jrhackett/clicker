@@ -28,3 +28,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+
+svg {
+	height: 100%;
+}

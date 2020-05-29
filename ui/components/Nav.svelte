@@ -1,6 +1,7 @@
 <script>
     import LogIn from 'components/LogIn'
     import Logout from 'components/Logout'
+    import Cat from 'public/cat.svg' 
     import colors from 'styles/colors'
     import { userStore } from 'stores'
 
@@ -19,11 +20,23 @@
 
     nav {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: center;
         padding: 0rem 2rem;
         background-color: var(--nav-background-color);
         height: 100%;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        color: var(--text-color);
+    }
+
+    p {
+        font-size: 1.5rem;
+        padding-left: 0.5rem;
     }
 
     ul {
@@ -47,6 +60,10 @@
 
 <header style="--height:{ height };--text-color:{ colors.white };">
 	<nav style="--nav-background-color:{ colors.blue }; --nav-background-hover-color:{ colors.lightGrey };">
+        <div>
+            {@html Cat}
+            <p>Kittenfluencer</p>
+        </div>
         <ul>
             {#if user.id !== 0}
                 <li>{ user.name }</li>

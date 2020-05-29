@@ -8,7 +8,6 @@
 <style>
     div {
         display: flex;
-        flex-basis: 100%;
         align-items: center;
         flex-direction: column;
     }
