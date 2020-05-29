@@ -40,11 +40,11 @@
 <li on:click={ () => handleClick(generator.name) }>
     <div class="inner">
         <div class="tile" style="--tile-color:{ player.liquid >= generator.cost ? colors.blue : colors.lightGrey };--text-color:{ colors.white }">
-            <h3>Name: { generator.name }</h3>
-            <p>Cost: { generator.cost && generator.cost.toFixed(0) }</p>
-            <p>Count: { generator.count }</p>
+            <h3>{ generator.name }</h3>
+            <p>Cost: { generator.cost && generator.cost.toFixed(0) } likes</p>
+            <p>Owned: { generator.count }</p>
             <p>ROI: { generator.gained.toFixed(0) }</p>
-            <p>LPS: { generator.gain_per_second }</p>
+            <p>Yield: { generator.gain_per_second }</p>
         </div>
     </div>
 </li>
