@@ -1,5 +1,5 @@
 <script>
-    import Tile from 'components/Tile'
+    import Tiles from 'components/Tiles'
     import Hit from 'components/Hit'
     import Worth from 'components/Worth'
     import Nav from 'components/Nav'
@@ -84,11 +84,7 @@
         <div class="inner" style="--border-color:{ colors.grey }">
             {#if !!player}
                 <div class="generators">
-                    <ul>
-                        {#each player.generators as generator}
-                            <Tile generator={ generator } />
-                        {/each}
-                    </ul>
+                    <Tiles />
                 </div>
                 <div class="hit" style="--background-color:{ colors.yellow };">
                     <Worth />

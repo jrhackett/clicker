@@ -8,13 +8,14 @@ import (
 
 type (
 	Generator struct {
-		Name          GeneratorName `json:"name"`
-		Count         int64         `json:"count"`
-		InitialCost   float64       `json:"-"`
-		GainPerSecond float64       `json:"gain_per_second"`
-		Gained        float64       `json:"gained"`
-		RateOfGrowth  float64       `json:"-"`
-		LastEvaluated time.Time     `json:"last_evaluated"`
+		Name          string    `json:"name"`
+		Category      string    `json:"category"`
+		Count         int64     `json:"count"`
+		InitialCost   float64   `json:"-"`
+		GainPerSecond float64   `json:"gain_per_second"`
+		Gained        float64   `json:"gained"`
+		RateOfGrowth  float64   `json:"-"`
+		LastEvaluated time.Time `json:"last_evaluated"`
 	}
 
 	Generators []*Generator
@@ -24,7 +25,8 @@ func New() Generators {
 	now := time.Now()
 	return Generators{
 		&Generator{
-			Name:          A,
+			Name:          "Top Hat",
+			Category:      "Outfits",
 			Count:         0,
 			InitialCost:   5,
 			GainPerSecond: 2,
@@ -33,7 +35,8 @@ func New() Generators {
 			LastEvaluated: now,
 		},
 		&Generator{
-			Name:          B,
+			Name:          "Sweater",
+			Category:      "Outfits",
 			Count:         0,
 			InitialCost:   40,
 			GainPerSecond: 5,
@@ -42,7 +45,8 @@ func New() Generators {
 			LastEvaluated: now,
 		},
 		&Generator{
-			Name:          C,
+			Name:          "C",
+			Category:      "Toys",
 			Count:         0,
 			InitialCost:   100,
 			GainPerSecond: 10,
@@ -51,7 +55,8 @@ func New() Generators {
 			LastEvaluated: now,
 		},
 		&Generator{
-			Name:          D,
+			Name:          "D",
+			Category:      "Toys",
 			Count:         0,
 			InitialCost:   250,
 			GainPerSecond: 22,
@@ -60,7 +65,8 @@ func New() Generators {
 			LastEvaluated: now,
 		},
 		&Generator{
-			Name:          E,
+			Name:          "E",
+			Category:      "Toys",
 			Count:         0,
 			InitialCost:   400,
 			GainPerSecond: 45,
@@ -69,7 +75,8 @@ func New() Generators {
 			LastEvaluated: now,
 		},
 		&Generator{
-			Name:          F,
+			Name:          "F",
+			Category:      "Toys",
 			Count:         0,
 			InitialCost:   1000,
 			GainPerSecond: 95,
@@ -78,12 +85,13 @@ func New() Generators {
 			LastEvaluated: now,
 		},
 		&Generator{
-			Name:          G,
+			Name:          "G",
+			Category:      "Toys",
 			Count:         0,
 			InitialCost:   5000,
 			GainPerSecond: 200,
 			Gained:        0,
-			RateOfGrowth:  0.8,
+			RateOfGrowth:  0.5,
 			LastEvaluated: now,
 		},
 	}
@@ -122,10 +130,8 @@ func (gs *Generators) Cost(name string, count int) (float64, error) {
 }
 
 func (gs *Generators) generatorIndex(name string) (int, error) {
-	generator := GeneratorName(name)
-
 	for i, g := range *gs {
-		if g.Name == generator {
+		if g.Name == name {
 			return i, nil
 		}
 	}
