@@ -32,3 +32,21 @@ body {
 svg {
 	height: 100%;
 }
+
+@font-face {
+	font-family: 'Chelsea';
+	src:  url('public/ChelseaMarket-Regular.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: 'EBGaramond';
+	src:  url('EBGaramond-VariableFont_wght.ttf') format('ttf');
+}
+
+h1, h2, h3, h4, h5, h6, span, button {
+	font-family: 'Chelsea Market', cursive;
+}
+
+p {
+	font-family: 'EB Garamond', serif;
+}
